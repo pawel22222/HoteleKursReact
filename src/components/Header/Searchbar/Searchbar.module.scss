@@ -1,0 +1,8 @@
+.input{
+    background-color: var(--color-bg-3);
+    border-color: var(--color-bg-1);
+    color: var(--color-bg-1-switch);
+}.input:focus{
+    background-color: var(--color-bg-3);
+    color: var(--color-bg-1-switch);
+}

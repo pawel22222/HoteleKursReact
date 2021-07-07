@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "name": "Pod wierzbą",
+        "city": "Kraków",
+        "rating": 2.7,
+        "desc": "Miłe i przytulne  miejsce dla całej rodziny"
+    },
+    {
+        "id": 2,
+        "name": "Prezydencki",
+        "city": "Warszawa",
+        "rating": 9.8,
+        "desc": "Najlepszy hotel w Polsce"
+    },
+    {
+        "id": 3,
+        "name": "Biała mewa",
+        "city": "Gdańsk",
+        "rating": 8.1,
+        "desc": "Dla każdego wilka morskiego"
+    },
+    {
+        "id": 4,
+        "name": "Wawelski",
+        "city": "Kraków",
+        "rating": 4.1,
+        "desc": "Dla każdego coś dobrego"
+    }
+  ]

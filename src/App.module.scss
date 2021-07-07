@@ -1,0 +1,19 @@
+ @import "./colors.scss";
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    transition:  background-color .4s ;
+
+}
+
+.test{
+    color: var(--color-bg-1);
+    
+}
+
+.appDiv{
+    background-color: var(--color-bg-1);
+
+}
+

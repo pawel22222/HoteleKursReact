@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './App.module.scss'
 
 import Header from './components/Header/Header'
@@ -14,14 +14,22 @@ import hotelsJSON from './hotels.json'
 function App() {
 
 
+  const [hotels, setHotels] = useState([])
+  const [loading, setLoading] = useState(true)
 
-  const hotels = hotelsJSON.sort((a, b) => (a.name > b.name ? 1 : -1))
-
-  const [hotelsFilter, setHotelsFilter] = useState(hotels)
+  useEffect(() => {
+    const getData = () => {
+      setTimeout(() => {
+        setHotels(hotelsJSON.sort((a, b) => (a.name > b.name ? 1 : -1)))
+        setLoading(false)
+      }, 1000)
+    }
+    getData()
+  })
 
   // Filtrowanie hoteli przez SEARCHBARU
   const filterHotels = (inputName, inputCity) =>
-    setHotelsFilter(hotels.filter(hotel =>
+    setHotels(hotels.filter(hotel =>
       hotel.name.toLowerCase().includes(inputName.toLowerCase()) &&
       hotel.city.toLowerCase().includes(inputCity.toLowerCase())
     ))
@@ -33,7 +41,11 @@ function App() {
   function showComponent(showContent) {
     switch (showContent) {
       case 'home': return <Home />
-      case 'hotels': return <Hotels hotels={ hotelsFilter } />
+      case 'hotels':
+        if (loading) return <div className={ `${styles.loadingDiv}` }>Ładowanie danych . . .</div>
+        else return <Hotels hotels={ hotels } />
+
+
       case 'aboutUs': return <AboutUs />
       case 'contact': return <Contakt />
 
@@ -43,21 +55,24 @@ function App() {
 
   const changeComponent = (e) => setShowContent(e.target.getAttribute("data-name"))
 
-
-
   return (
     <div
       data-mode="dark"
       className={ `appDiv ${styles.appDiv}` }>
-      <Header filterHotels={ filterHotels } />
+
+      <Header
+        filterHotels={ filterHotels }
+        showContent={ showContent } />
       <Menu changeComponent={ changeComponent } />
+
 
       { showComponent(showContent) }
 
       <Footer />
 
+
     </div>
-  );
+  )
 
 }
 

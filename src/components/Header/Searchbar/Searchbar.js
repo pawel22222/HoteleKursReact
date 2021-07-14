@@ -12,7 +12,7 @@ function Searchbar({ filterHotels }) {
     const enterKeyDown = (e) => e.key === "Enter" && search()
 
     return (
-        <div className="form-group d-flex ">
+        <div className={ `form-group d-flex  ${styles.searchbarDiv}` } >
             <input
                 className={ ` form-control ${styles.input}` }
                 placeholder="Nazwa.."

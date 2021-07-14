@@ -17,7 +17,7 @@ function Hotel({ name, city, rating, desc }) {
                 </div>
                 <div className="col d-flex flex-column align-items-end">
                     <p className="">Ocena: <span>{ rating }</span></p>
-                    <a href="#" className="btn btn-primary ">Pokaż</a>
+                    <button className="btn btn-primary ">Pokaż</button>
                 </div>
             </div>
             <p>{ desc }</p>

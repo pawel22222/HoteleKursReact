@@ -14,6 +14,14 @@
 
 .appDiv{
     background-color: var(--color-bg-3);
-
+    min-height: calc(100vh);
+    
 }
 
+.loadingDiv{
+    min-height: calc(100vh - 210px);
+    color: var(--color-bg-1-switch);
+    font-size: 1.5em;
+    text-align: center;
+    
+}

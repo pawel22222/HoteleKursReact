@@ -1,11 +1,10 @@
 import styles from './Header.module.scss'
-import Searchbar from './Searchbar/Searchbar'
 
-function Header({ filterHotels, showContent }) {
+function Header(props) {
     return (
-        <div className={ `${styles.header} ` }>
-            { (showContent === 'hotels' && <Searchbar filterHotels={ filterHotels } />) }
-        </div>
+        <header className={ `${styles.header} ` }>
+            { props.children }
+        </header>
     )
 }
 

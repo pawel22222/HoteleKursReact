@@ -1,13 +1,10 @@
 @import "../../colors.scss";
 
-.btnMode{
-    background-color: var(--color-bg-1-switch);
-    color: var(--color-bg-2);
-}
+
 
 .btnMode:hover{
+    background-color: #ffffff;
     color: var(--color-bg-2);
-    background-color: var(--color-bg-2-switch);
 }
 
 .menuDiv{

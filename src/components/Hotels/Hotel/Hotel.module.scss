@@ -1,4 +1,21 @@
 .hotelDiv{
     background-color: var(--color-bg-1);
     color: var(--color-text-1);
+    position: relative;
+    animation: slidein 1s ease both;
+    
+    @for $i from 1 through 7 {
+      &:nth-child(#{$i}) {
+        animation-delay: $i * 50ms;
+      }
+    }
 }
+
+@keyframes slidein {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }

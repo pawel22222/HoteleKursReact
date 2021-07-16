@@ -3,6 +3,10 @@
     margin: 0;
     transition:  background-color .4s ;
 }
+::selection {
+    color: #e6e6e6;
+    background: #0B5ED7;
+  }
 
 .test{
     color: var(--color-bg-1);

@@ -1,22 +1,9 @@
 import styles from './Menu.module.scss'
 
 import MenuItem from './MenuItem/MenuItem'
+// import ThemeBtn from '../UI/ThemeBtn/ThemeBtn'
 
 function Menu({ changeComponent }) {
-
-
-    const appDiv = document.querySelector('.appDiv')
-    const btnMode = document.querySelector('.btnMode')
-
-    const changeColor = () => {
-        if (appDiv.getAttribute('data-mode') === 'light') {
-            appDiv.setAttribute('data-mode', 'dark')
-            btnMode.innerHTML = "Jasny"
-        } else {
-            appDiv.setAttribute('data-mode', 'light')
-            btnMode.innerHTML = "Ciemny"
-        }
-    }
 
     const menuList = [
         {
@@ -44,7 +31,7 @@ function Menu({ changeComponent }) {
 
     return (
         <div className={ `card ${styles.menuDiv}` }>
-            <ul className={ `d-flex justify-content-around p-2 nav` }>
+            <ul className={ `container d-flex justify-content-around p-2 nav` }>
                 { menuList.map((menuItem) =>
                     <MenuItem
                         key={ menuItem.id }
@@ -52,12 +39,6 @@ function Menu({ changeComponent }) {
                         changeComponent={ changeComponent }
                     />) }
 
-
-
-                <button
-                    className={ `btnMode ${styles.btnMode}  btn` }
-                    onClick={ changeColor }
-                >Jasny</button>
             </ul>
         </div>
     )

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import styles from './App.module.scss'
 
+import Layout from './components/Layout/Layout'
 import Header from './components/Header/Header'
 import Menu from './components/Menu/Menu'
 import Home from './components/Home/Home'
@@ -9,6 +10,7 @@ import AboutUs from './components/AboutUs/aboutUs'
 import Contakt from './components/Contakt/Contakt'
 import Footer from './components/Footer/Footer'
 
+import Info from './components/UI/Info/Info'
 import Loading from './components/UI/Loading/Loading'
 import Searchbar from './components/UI/Searchbar/Searchbar'
 
@@ -29,14 +31,12 @@ function App() {
       setLoading(false)
       console.log('pobranie danych');
     }
-
     fetchHotels()
   }, [])
 
 
   // Filtrowanie hoteli przez SEARCHBAR
   const filterHotels = (inputName, inputCity) => {
-
     const fetchHotels = async () => {
       const hotels = await fetch('https://run.mocky.io/v3/26c76a68-c162-4fcd-bcdd-5b400816601d')
         .then(res => res.json())
@@ -58,7 +58,8 @@ function App() {
     switch (showContent) {
       case 'home': return <Home />
       case 'hotels':
-        if (loading || hotels === []) return <Loading />
+        if (loading) return <Loading />
+        else if (hotels.length === 0) return <Info textInfo="Brak hoteli do wyświetlenia" />
         else return <Hotels hotels={ hotels } />;
 
       case 'aboutUs': return <AboutUs />
@@ -74,22 +75,24 @@ function App() {
     <div
       data-mode="dark"
       className={ `appDiv ${styles.appDiv}` }>
+      <Layout
+        header={
+          <Header
+            filterHotels={ filterHotels }
+            showContent={ showContent } >
+            { (showContent === 'hotels' && <Searchbar filterHotels={ filterHotels } />) }
+          </Header> }
 
-      <Header
-        filterHotels={ filterHotels }
-        showContent={ showContent } >
-        { (showContent === 'hotels' && <Searchbar filterHotels={ filterHotels } />) }
-      </Header>
-      <Menu changeComponent={ changeComponent } />
+        menu={ <Menu changeComponent={ changeComponent } /> }
 
-      <div className={ `${styles.mainContentDiv}` }>
-        <h1 className={ `${styles.headerHotels} ` }>Hotele</h1>
-        { showComponent(showContent) }
-      </div>
+        content={
+          <div className={ `${styles.mainContentDiv}` }>
+            <h1 className={ `${styles.headerHotels} ` }>Hotele</h1>
+            { showComponent(showContent) }
+          </div> }
 
-      <Footer />
-
-
+        footer={ <Footer /> }
+      />
     </div>
   )
 

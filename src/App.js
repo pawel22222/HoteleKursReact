@@ -1,18 +1,22 @@
 import { useState, useEffect } from 'react'
 import styles from './App.module.scss'
-
+//Components
 import Layout from './components/Layout/Layout'
 import Header from './components/Header/Header'
 import Menu from './components/Menu/Menu'
 import Home from './components/Home/Home'
 import Hotels from './components/Hotels/Hotels'
+import Hotel from './components/Hotels/Hotel/Hotel'
 import AboutUs from './components/AboutUs/aboutUs'
 import Contakt from './components/Contakt/Contakt'
 import Footer from './components/Footer/Footer'
-
+//Components UI
 import Info from './components/UI/Info/Info'
 import Loading from './components/UI/Loading/Loading'
 import Searchbar from './components/UI/Searchbar/Searchbar'
+//Context
+// import AuthContext from './Context/authContext'
+
 
 // import hotelsJSON from './hotels.json'
 
@@ -20,7 +24,6 @@ function App() {
 
 
   const [hotels, setHotels] = useState([])
-  const [loading, setLoading] = useState(true)
 
   // Pobieranie hoteli z mocky
   useEffect(() => {
@@ -51,16 +54,21 @@ function App() {
   }
 
 
-  // Pokazywanie tresci za pomoca MENU
-  const [showContent, setShowContent] = useState('hotels')
+  // Przełączanie zakładek za pomoca MENU
+  const [showMainContent, setShowMainContent] = useState('hotels')
+  const [loading, setLoading] = useState(true)
 
-  function showComponent(showContent) {
+  function showMainComponent(showContent) {
     switch (showContent) {
       case 'home': return <Home />
       case 'hotels':
         if (loading) return <Loading />
         else if (hotels.length === 0) return <Info textInfo="Brak hoteli do wyświetlenia" />
-        else return <Hotels hotels={ hotels } />;
+        else
+          return (
+            <Hotels hotels={ hotels }>
+              { hotels.map((hotel) => <Hotel key={ hotel.id } { ...hotel } />) }
+            </Hotels>)
 
       case 'aboutUs': return <AboutUs />
       case 'contact': return <Contakt />
@@ -69,7 +77,7 @@ function App() {
     }
   }
 
-  const changeComponent = (e) => setShowContent(e.target.getAttribute("data-name"))
+  const changeComponent = (e) => setShowMainContent(e.target.getAttribute("data-name"))
 
   return (
     <div
@@ -78,24 +86,21 @@ function App() {
       <Layout
         header={
           <Header
-            filterHotels={ filterHotels }
-            showContent={ showContent } >
-            { (showContent === 'hotels' && <Searchbar filterHotels={ filterHotels } />) }
+            filterHotels={ filterHotels }>
+            { (showMainContent === 'hotels' && <Searchbar filterHotels={ filterHotels } />) }
           </Header> }
 
         menu={ <Menu changeComponent={ changeComponent } /> }
 
-        content={
-          <div className={ `${styles.mainContentDiv}` }>
-            <h1 className={ `${styles.headerHotels} ` }>Hotele</h1>
-            { showComponent(showContent) }
-          </div> }
+        main={
+          <main className={ `${styles.mainDiv}` }>
+            { showMainComponent(showMainContent) }
+          </main> }
 
         footer={ <Footer /> }
       />
     </div>
   )
-
 }
 
 export default App;

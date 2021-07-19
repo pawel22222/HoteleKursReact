@@ -1,11 +1,11 @@
 
 
-const Layout = function ({ header, menu, content, footer }) {
+const Layout = function ({ header, menu, main, footer }) {
     return (
         <div>
             { header }
             { menu }
-            { content }
+            { main }
             { footer }
         </div>
     )

@@ -1,11 +1,11 @@
-import Hotel from './Hotel/Hotel'
 import styles from './Hotels.module.scss'
 
-function Hotels({ hotels }) {
+function Hotels({ children }) {
     return (
         <div className={ `container ${styles.hotelsDiv}` } >
+            <h1 className={ `${styles.headerHotels} ` }>Hotele</h1>
             <div>
-                { hotels.map(hotel => <Hotel key={ hotel.id } { ...hotel } />) }
+                { children }
             </div>
         </div>
     )

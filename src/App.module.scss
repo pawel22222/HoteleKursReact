@@ -17,15 +17,10 @@
     min-height: calc(100vh);
 }
 
-.mainContentDiv{
+.mainDiv{
     min-height: calc(100vh - 210px);
     color: var(--color-bg-1-switch);
     font-size: 1.5em;
     text-align: center;
 }
 
-.headerHotels{
-    font-weight: bold;
-    text-align: center;
-    color: var(--color-text-1);
-}

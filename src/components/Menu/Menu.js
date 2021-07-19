@@ -1,7 +1,6 @@
 import styles from './Menu.module.scss'
 
 import MenuItem from './MenuItem/MenuItem'
-// import ThemeBtn from '../UI/ThemeBtn/ThemeBtn'
 
 function Menu({ changeComponent }) {
 

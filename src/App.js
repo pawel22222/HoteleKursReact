@@ -15,13 +15,12 @@ import Info from './components/UI/Info/Info'
 import Loading from './components/UI/Loading/Loading'
 import Searchbar from './components/UI/Searchbar/Searchbar'
 //Context
-// import AuthContext from './Context/authContext'
+import AuthContext from './Context/authContext'
 
-
+// Dane hoteli
 // import hotelsJSON from './hotels.json'
 
 function App() {
-
 
   const [hotels, setHotels] = useState([])
 
@@ -77,29 +76,35 @@ function App() {
     }
   }
 
+
   const changeComponent = (e) => setShowMainContent(e.target.getAttribute("data-name"))
 
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+
+
   return (
-    <div
-      data-mode="dark"
-      className={ `appDiv ${styles.appDiv}` }>
-      <Layout
-        header={
-          <Header
-            filterHotels={ filterHotels }>
-            { (showMainContent === 'hotels' && <Searchbar filterHotels={ filterHotels } />) }
-          </Header> }
+    <AuthContext.Provider value={ {
+      isAuthenticated: isAuthenticated,
+      logIn: () => setIsAuthenticated(true),
+      logOut: () => setIsAuthenticated(false)
+    } }>
+      <div
+        data-mode="dark"
+        className={ `appDiv ${styles.appDiv}` }>
 
-        menu={ <Menu changeComponent={ changeComponent } /> }
+        <Layout
+          header={ <Header filterHotels={ filterHotels }>
+            { (showMainContent === 'hotels' && <Searchbar filterHotels={ filterHotels } />) }</Header> }
 
-        main={
-          <main className={ `${styles.mainDiv}` }>
-            { showMainComponent(showMainContent) }
-          </main> }
+          menu={ <Menu changeComponent={ changeComponent } /> }
 
-        footer={ <Footer /> }
-      />
-    </div>
+          main={ <main className={ `${styles.mainDiv}` }>
+            { showMainComponent(showMainContent) }</main> }
+
+          footer={ <Footer /> }
+        />
+      </div>
+    </AuthContext.Provider>
   )
 }
 

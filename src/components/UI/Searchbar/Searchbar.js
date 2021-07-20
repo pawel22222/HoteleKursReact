@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import styles from './Searchbar.module.scss'
 
 
@@ -7,6 +7,12 @@ function Searchbar({ filterHotels }) {
     const [inputName, setInputName] = useState('')
     const [inputCity, setInputCity] = useState('')
 
+    const firstInputRef = useRef(null)
+
+    useEffect(() => {
+        firstInputRef.current.focus()
+    }, [])
+
     const search = () => filterHotels(inputName, inputCity)
 
     const enterKeyDown = (e) => e.key === "Enter" && search()
@@ -14,7 +20,8 @@ function Searchbar({ filterHotels }) {
     return (
         <div className={ `form-group d-flex  ${styles.searchbarDiv}` } >
             <input
-                className={ ` form-control ${styles.input}` }
+                ref={ firstInputRef }
+                className={ `firstInput form-control ${styles.input}` }
                 placeholder="Nazwa.."
                 value={ inputName }
                 onChange={ (e) => setInputName(e.target.value) }
@@ -33,7 +40,7 @@ function Searchbar({ filterHotels }) {
             >
                 Szukaj
             </button>
-        </div>
+        </div >
     )
 }
 
